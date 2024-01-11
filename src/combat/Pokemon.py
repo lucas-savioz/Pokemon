@@ -1,3 +1,6 @@
+import pygame
+import sys
+
 class Pokemon:
     def __init__(self, nom, point_de_vie, type, poids, taille, environnement, description):
         self.nom = nom
@@ -10,11 +13,11 @@ class Pokemon:
         self.niveau = 1  # Niveau initial
         self.statut_bar_exp = 0  # Barre d'expérience initiale
 
-     
-    
     def gagner_experience(self, experience):
         self.statut_bar_exp += experience
-        if self.statut_bar_exp >= 100:  # Condition barre_exp
+        if self.statut_bar_exp >= 100:  # Condition de la bar_exp
             self.niveau += 1
             self.statut_bar_exp = 0
             print(f"{self.nom} est passé niveau {self.niveau}!")
+
+    
