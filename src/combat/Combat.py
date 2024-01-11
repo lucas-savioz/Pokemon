@@ -33,3 +33,10 @@ class Combat:
                 return 1
         else:  # type_joueur == "normal"
             return 1
+    
+    def attaquer(self):
+        efficacite = self.calculer_efficacite()
+        degats = 10 * efficacite  # Valeur arbitraire, à ajuster selon le besoin
+        self.adversaire.point_de_vie -= degats
+        print(f"{self.joueur.nom} attaque {self.adversaire.nom} et lui inflige {degats} points de dégâts!")
+    
