@@ -15,6 +15,18 @@ while running:
 
     # Mettez ici le reste du code pour votre jeu
 
+class Game:
+    def __init__(self):
+        self.running = True
+        self.screen = Screen()
+        self.map = Map(self.screen)
+
+    def run(self):
+        while self.running:
+            self.map.update()
+            self.screen.update()
+
+            
 import tkinter as tk
 from tkinter import messagebox
 
