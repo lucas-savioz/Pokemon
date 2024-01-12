@@ -1,15 +1,25 @@
 import pygame
 
-from screen import Screen
-from map import Map
+pygame.init()
 
-class Game:
-    def __init__(self):
-        self.running = True
-        self.screen = Screen()
-        self.map = Map(self.screen)
+# Crée une fenêtre
+screen = pygame.display.set_mode((1200, 800))
+pygame.display.set_caption("Ma première fenêtre Pygame")
 
-    def run(self):
-        while self.running:
-            self.map.update()
-            self.screen.update()
+# Boucle principale
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    # Mettez ici le reste du code pour votre jeu
+
+import tkinter as tk
+from tkinter import messagebox
+
+pygame.quit()
+
+
+
+
