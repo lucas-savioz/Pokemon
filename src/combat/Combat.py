@@ -1,5 +1,6 @@
 import pygame
 import sys
+from Pokemon import Pokemon
 
 class Combat:
     def __init__(self, joueur, adversaire):
@@ -66,3 +67,11 @@ class Combat:
 
             if self.joueur.point_de_vie <= 0:
                 break
+
+
+# Initialisation Pygame et autres paramètres du jeu à ajouter ici
+            
+
+
+# Création d'une instance de la classe Pokemon pour le joueur
+joueur = Pokemon("Joueur", 100, "feu", 20, 1.5, "Forêt", "Le joueur principal!")
