@@ -1,5 +1,6 @@
 import pygame
 import sys
+from Pokemon import Pokemon
 
 class Combat:
     def __init__(self, joueur, adversaire):
@@ -51,3 +52,26 @@ class Combat:
             print(f"{self.adversaire.nom} attaque {self.joueur.nom} et lui inflige des dégâts!")
             if self.joueur.point_de_vie <= 0:
                 print(f"{self.adversaire.nom} a gagné le combat!")
+
+    def derouler_combat(self):
+        print(f"Un combat commence entre {self.joueur.nom} et {self.adversaire.nom}!")
+
+        while self.joueur.point_de_vie > 0 and self.adversaire.point_de_vie > 0:
+            # Logique du combat ici...
+            self.attaquer_adversaire()
+
+            if self.adversaire.point_de_vie <= 0:
+                break
+
+            self.attaquer_joueur()
+
+            if self.joueur.point_de_vie <= 0:
+                break
+
+
+# Initialisation Pygame et autres paramètres du jeu à ajouter ici
+            
+
+
+# Création d'une instance de la classe Pokemon pour le joueur
+joueur = Pokemon("Joueur", 100, "feu", 20, 1.5, "Forêt volcanique", "Ce pokémon ne tient pas en place, il a toujours besoin d'être en activité")
