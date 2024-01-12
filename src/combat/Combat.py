@@ -39,4 +39,8 @@ class Combat:
         degats = 10 * efficacite  # Valeur arbitraire, à ajuster selon le besoin
         self.adversaire.point_de_vie -= degats
         print(f"{self.joueur.nom} attaque {self.adversaire.nom} et lui inflige {degats} points de dégâts!")
-    
+
+    def attaquer_adversaire(self):
+        self.attaquer()
+        if self.adversaire.point_de_vie <= 0:
+            print(f"{self.joueur.nom} a gagné le combat!")
