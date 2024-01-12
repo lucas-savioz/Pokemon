@@ -26,7 +26,7 @@ def commencer_combat(self):
 def demarrer_interface(self):
     self.fenetre.mainloop()
     
-Exemple d'utilisation
+#Exemple d'utilisation
 jeu_pokemon = Jeu()
 interface = InterfaceUtilisateur(jeu_pokemon)
 interface.demarrer_interface()
