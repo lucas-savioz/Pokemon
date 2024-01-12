@@ -74,4 +74,4 @@ class Combat:
 
 
 # Création d'une instance de la classe Pokemon pour le joueur
-joueur = Pokemon("Joueur", 100, "feu", 20, 1.5, "Forêt", "Le joueur principal!")
+joueur = Pokemon("Joueur", 100, "feu", 20, 1.5, "Forêt volcanique", "Ce pokémon ne tient pas en place, il a toujours besoin d'être en activité")
