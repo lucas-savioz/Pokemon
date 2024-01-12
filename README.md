@@ -24,7 +24,6 @@ Documentation :
 Objectif : Rédiger une documentation claire et concise pour faciliter la maintenance du code et permettre à d'autres développeurs de comprendre le projet.
 
 
-
 Pokémon Game ◓ with Python
 
 Table of Contents
@@ -33,19 +32,17 @@ Installation
 Usage
 Contributing
 Credits
-License
 Questions
 Screenshots
 Links
 Features
-Donations
 Description
-This is a remake of a Pokémon game. The storyline is not implemented.
+
 
 Installation
 To install this project, you will need to download the repository. You will also need to install the following modules:
 
-pygame (pygame-ce for Python 3.11)12
+pygame (pygame-ce for Python 3.12)
 pytmx
 pyscroll ---- Theoretically installed by default ----
 datetime
@@ -54,6 +51,7 @@ pathlib
 random
 sys
 os
+
 Usage
 To run the game, you will need to run the main.py file. You can do this by running the following command in the terminal: python3 code/main.py
 
@@ -71,7 +69,7 @@ License
 This Project Does Not Have A License.
 
 Questions
-If you have any questions, you can contact me at the following email address: arnaudd.michel@gmail.com
+If you have any questions, you can contact me at the following email address:
 
 Screenshots
 Screenshot 1 Screenshot 2 Screenshot 3
@@ -113,7 +111,6 @@ Features
  Strength
  Flash
  Rock Smash
-Donations
-If you want to support me, you can donate with the following link: PayPal
+
 
 © 2024 . All Rights Reserved.
