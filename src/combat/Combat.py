@@ -44,3 +44,10 @@ class Combat:
         self.attaquer()
         if self.adversaire.point_de_vie <= 0:
             print(f"{self.joueur.nom} a gagné le combat!")
+
+    def attaquer_joueur(self):
+        adversaire_attaque = self.adversaire.attaquer(self.joueur)
+        if adversaire_attaque:
+            print(f"{self.adversaire.nom} attaque {self.joueur.nom} et lui inflige des dégâts!")
+            if self.joueur.point_de_vie <= 0:
+                print(f"{self.adversaire.nom} a gagné le combat!")

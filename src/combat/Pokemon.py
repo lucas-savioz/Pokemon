@@ -19,5 +19,3 @@ class Pokemon:
             self.niveau += 1
             self.statut_bar_exp = 0
             print(f"{self.nom} est passé niveau {self.niveau}!")
-
-    
