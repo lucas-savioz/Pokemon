@@ -1,0 +1,173 @@
+{
+    "pokemon" : [        
+        {
+            "id" : "0037",
+            "name" : "Goupix",
+            "type" : "Feu",
+            "force" : "Plante",
+            "faiblesse" : "Eau",
+            "évolution possible" : "Feunard",
+            "évolution de" : "-"  
+        },
+        
+        {
+            "id" : "0038",
+            "name" : "Feunard",
+            "type" : "Feu",
+            "force" : "Plante",
+            "faiblesse" : "Eau",
+            "évolution possible" : "-",
+            "évolution de" : "Goupix"  
+        },
+
+        {
+            "id" : "0039",
+            "name" : "Rondoudou",
+            "type" : "Normal",
+            "force" : "-",
+            "faiblesse" : "-",
+            "évolution possible" : "-",
+            "évolution de" : "-"          
+        },
+        
+        {
+            "id" : "0043",
+            "name" : "Mystherbe",
+            "type" : "Plante",
+            "force" : "Eau",
+            "faiblesse" : "Feu",
+            "évolution possible" : "Ortide",
+            "évolution de" : "-"  
+        },
+        
+        {
+            "id" : "0044",
+            "name" : "Ortide",
+            "type" : "Plante",
+            "force" : "Eau",
+            "faiblesse" : "Feu",
+            "évolution possible" : "-",
+            "évolution de" : "Mystherbe"  
+        },
+
+        {
+            "id" : "0052",
+            "name" : "Miaouss",
+            "type" : "Normal",
+            "force" : "-",
+            "faiblesse" : "-",
+            "évolution possible" : "Persian",
+            "évolution de" : "-"      
+        },
+
+        {
+            "id" : "0053",
+            "name" : "Persian",
+            "type" : "Normal",
+            "force" : "-",
+            "faiblesse" : "-",
+            "évolution possible" : "-",
+            "évolution de" : "Miaouss"      
+        },
+        
+        {
+            "id" : "0069",
+            "name" : "Chétiflor",
+            "type" : "Plante",
+            "force" : "Eau",
+            "faiblesse" : "Feu",
+            "évolution possible" : "Boustiflor",
+            "évolution de" : "-"  
+        },
+        
+        {
+            "id" : "0070",
+            "name" : "Boustiflor",
+            "type" : "Plante",
+            "force" : "Eau",
+            "faiblesse" : "Feu",
+            "évolution possible" : "-",
+            "évolution de" : "Chétiflor"  
+        },
+        
+        {
+            "id" : "0077",
+            "name" : "Ponyta",
+            "type" : "Feu",
+            "force" : "Plante",
+            "faiblesse" : "Eau",
+            "évolution possible" : "Galopa",
+            "évolution de" : "-"  
+        },
+        
+        {
+            "id" : "0078",
+            "name" : "Galopa",
+            "type" : "Feu",
+            "force" : "Plante",
+            "faiblesse" : "Eau",
+            "évolution possible" : "-",
+            "évolution de" : "Ponyta"  
+        },
+        
+        {
+            "id" : "0098",
+            "name" : "Krabby",
+            "type" : "Eau",
+            "force" : "Feu",
+            "faiblesse" : "Plante",
+            "évolution possible" : "Krabboss",
+            "évolution de" : "-"  
+        },
+        
+        {
+            "id" : "0099",
+            "name" : "Krabboss",
+            "type" : "Eau",
+            "force" : "Feu",
+            "faiblesse" : "Plante",
+            "évolution possible" : "-",
+            "évolution de" : "Krabby"  
+        },
+
+        {
+            "id" : "0108",
+            "name" : "Excelangue",
+            "type" : "Normal",
+            "force" : "-",
+            "faiblesse" : "-",
+            "évolution possible" : "-",
+            "évolution de" : "-"
+        },
+        
+        {
+            "id" : "0116",
+            "name" : "Hypotrempe",
+            "type" : "Eau",
+            "force" : "Feu",
+            "faiblesse" : "Plante",
+            "évolution possible" : "Hypocéan",
+            "évolution de" : "-"  
+        },
+        
+        {
+            "id" : "0117",
+            "name" : "Hypocéan",
+            "type" : "Eau",
+            "force" : "Feu",
+            "faiblesse" : "Plante",
+            "évolution possible" : "-",
+            "évolution de" : "Hypocéan"  
+        },
+
+        {
+            "id" : "0133",
+            "name" : "Évoli",
+            "type" : "Normal",
+            "force" : "-",
+            "faiblesse" : "-",
+            "évolution possible" : "-",
+            "évolution de" : "-"
+        }
+    ]
+}
