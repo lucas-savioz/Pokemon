@@ -2,8 +2,8 @@ import tkinter as tk
 from tkinter import messagebox
 
 class InterfaceUtilisateur:
-def init(self, jeu):
-self.jeu = jeu
+    def __init__(self, jeu):
+        self.jeu = jeu
 
     self.fenetre = tk.Tk()
     self.fenetre.title("Pokémon Game")
