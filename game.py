@@ -15,7 +15,14 @@ class Game:
             for event in pygame.event.get():
                 if event.type == QUIT:
                     self.running = False
-        
-        self.window.update()
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    mouse_pos = pygame.mouse.get_pos()
+                    if self.window.new_game_button_rect.collidepoint(mouse_pos):
+                        print("Nouvelle Partie")
+                    elif self.window.load_game_button_rect.collidepoint(mouse_pos):
+                        print("Charger une partie existante")
+
+            # Rafraîchi l'écran
+            self.window.update()
 
         pygame.quit()
