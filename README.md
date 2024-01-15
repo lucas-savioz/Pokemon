@@ -1,28 +1,18 @@
 # Pokemon
-#Objectifs du projet : Création d'un jeu fonctionnel :
-
-Développer un jeu de Pokémon fonctionnel, où le joueur peut participer à des combats contre des Pokémon sauvages et un dresseur, interagir avec le Pokédex.
-
-Interface utilisateur :
+Objectifs du projet :
+    Création d'un jeu fonctionnel 
+    Développer un jeu de Pokémon fonctionnel où le ou la joueur.se peuvent participer à des combats contre des Pokémon sauvages et un.e dresseur.se et interagir avec le Pokédex.
+    Interface utilisateur.ice :
 
 Objectif : Concevoir une interface graphique simple et intuitive pour assurer une bonne expérience utilisateur.
-
 Mécaniques de combat :
-
 Objectif : Implémenter des mécaniques de combat basées sur les types de Pokémon, avec des calculs de dégâts en fonction des types et des statistiques.
-
 Sauvegarde des données :
-
 Objectif : Intégrer un système de sauvegarde des données des Pokémon dans des fichiers (pokedex.json, pokemon.json) pour permettre la persistance des données entre les sessions de jeu.
-
 Gestion du Pokédex :
-
 Objectif : Permettre au joueur de consulter et d'agrandir le Pokédex en enregistrant les informations sur les Pokémon rencontrés.
-
 Documentation :
-
 Objectif : Rédiger une documentation claire et concise pour faciliter la maintenance du code et permettre à d'autres développeurs de comprendre le projet.
-
 
 Pokémon Game ◓ with Python
 
@@ -30,8 +20,6 @@ Table of Contents
 Description
 Installation
 Usage
-Contributing
-Credits
 Questions
 Screenshots
 Links
@@ -42,7 +30,8 @@ Description
 Installation
 To install this project, you will need to download the repository. You will also need to install the following modules:
 
-pygame (pygame-ce for Python 3.12)
+pygame (pygame-ce for Python 3.11)
+2.5.2 version pygame
 pytmx
 pyscroll ---- Theoretically installed by default ----
 datetime
@@ -54,19 +43,6 @@ os
 
 Usage
 To run the game, you will need to run the main.py file. You can do this by running the following command in the terminal: python3 code/main.py
-
-Contributing
-If you want to contribute to this project, you can fork the repository and clone it to your computer. You can then make changes and submit a pull request.
-
-Credits
-Pokémon SDK for the sprites and the tileset.
-Flaticon for the icons.
-Pokémon Essentials for the inspiration.
-Pokémon Trash for the data about the Pokémon.
-Foret Eternelle for the graphic inspiration.
-Poképédia for the data about the Pokémon.
-License
-This Project Does Not Have A License.
 
 Questions
 If you have any questions, you can contact me at the following email address:
