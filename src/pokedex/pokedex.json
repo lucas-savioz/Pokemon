@@ -1,173 +1,256 @@
-{
-    "pokemon" : [        
-        {
-            "id" : "0037",
-            "name" : "Goupix",
-            "type" : "Feu",
-            "force" : "Plante",
-            "faiblesse" : "Eau",
-            "évolution possible" : "Feunard",
-            "évolution de" : "-"  
-        },
-        
-        {
-            "id" : "0038",
-            "name" : "Feunard",
-            "type" : "Feu",
-            "force" : "Plante",
-            "faiblesse" : "Eau",
-            "évolution possible" : "-",
-            "évolution de" : "Goupix"  
-        },
-
-        {
-            "id" : "0039",
-            "name" : "Rondoudou",
-            "type" : "Normal",
-            "force" : "-",
-            "faiblesse" : "-",
-            "évolution possible" : "-",
-            "évolution de" : "-"          
-        },
-        
-        {
-            "id" : "0043",
-            "name" : "Mystherbe",
-            "type" : "Plante",
-            "force" : "Eau",
-            "faiblesse" : "Feu",
-            "évolution possible" : "Ortide",
-            "évolution de" : "-"  
-        },
-        
-        {
-            "id" : "0044",
-            "name" : "Ortide",
-            "type" : "Plante",
-            "force" : "Eau",
-            "faiblesse" : "Feu",
-            "évolution possible" : "-",
-            "évolution de" : "Mystherbe"  
-        },
-
-        {
-            "id" : "0052",
-            "name" : "Miaouss",
-            "type" : "Normal",
-            "force" : "-",
-            "faiblesse" : "-",
-            "évolution possible" : "Persian",
-            "évolution de" : "-"      
-        },
-
-        {
-            "id" : "0053",
-            "name" : "Persian",
-            "type" : "Normal",
-            "force" : "-",
-            "faiblesse" : "-",
-            "évolution possible" : "-",
-            "évolution de" : "Miaouss"      
-        },
-        
-        {
-            "id" : "0069",
-            "name" : "Chétiflor",
-            "type" : "Plante",
-            "force" : "Eau",
-            "faiblesse" : "Feu",
-            "évolution possible" : "Boustiflor",
-            "évolution de" : "-"  
-        },
-        
-        {
-            "id" : "0070",
-            "name" : "Boustiflor",
-            "type" : "Plante",
-            "force" : "Eau",
-            "faiblesse" : "Feu",
-            "évolution possible" : "-",
-            "évolution de" : "Chétiflor"  
-        },
-        
-        {
-            "id" : "0077",
-            "name" : "Ponyta",
-            "type" : "Feu",
-            "force" : "Plante",
-            "faiblesse" : "Eau",
-            "évolution possible" : "Galopa",
-            "évolution de" : "-"  
-        },
-        
-        {
-            "id" : "0078",
-            "name" : "Galopa",
-            "type" : "Feu",
-            "force" : "Plante",
-            "faiblesse" : "Eau",
-            "évolution possible" : "-",
-            "évolution de" : "Ponyta"  
-        },
-        
-        {
-            "id" : "0098",
-            "name" : "Krabby",
-            "type" : "Eau",
-            "force" : "Feu",
-            "faiblesse" : "Plante",
-            "évolution possible" : "Krabboss",
-            "évolution de" : "-"  
-        },
-        
-        {
-            "id" : "0099",
-            "name" : "Krabboss",
-            "type" : "Eau",
-            "force" : "Feu",
-            "faiblesse" : "Plante",
-            "évolution possible" : "-",
-            "évolution de" : "Krabby"  
-        },
-
-        {
-            "id" : "0108",
-            "name" : "Excelangue",
-            "type" : "Normal",
-            "force" : "-",
-            "faiblesse" : "-",
-            "évolution possible" : "-",
-            "évolution de" : "-"
-        },
-        
-        {
-            "id" : "0116",
-            "name" : "Hypotrempe",
-            "type" : "Eau",
-            "force" : "Feu",
-            "faiblesse" : "Plante",
-            "évolution possible" : "Hypocéan",
-            "évolution de" : "-"  
-        },
-        
-        {
-            "id" : "0117",
-            "name" : "Hypocéan",
-            "type" : "Eau",
-            "force" : "Feu",
-            "faiblesse" : "Plante",
-            "évolution possible" : "-",
-            "évolution de" : "Hypocéan"  
-        },
-
-        {
-            "id" : "0133",
-            "name" : "Évoli",
-            "type" : "Normal",
-            "force" : "-",
-            "faiblesse" : "-",
-            "évolution possible" : "-",
-            "évolution de" : "-"
-        }
-    ]
+[{
+    "id": 37,
+    "name": "Goupix",
+    "type": [
+      "Feu"
+    ],
+    "base": {
+        "HP": 38,
+        "Attack": 41,
+        "Defense": 40,
+        "Sp. Attack": 50,
+        "Sp. Defense": 65,
+        "Speed": 65
+    }
+  },
+  {
+    "id": 38,
+    "name": "Feunard",
+    "type": [
+      "Feu"
+    ],
+    "base": {
+        "HP": 73,
+        "Attack": 76,
+        "Defense": 75,
+        "Sp. Attack": 81,
+        "Sp. Defense": 100,
+        "Speed": 100
+    }
+  },
+  {
+    "id": 39,
+    "name": "Rondoudou",
+    "type": [
+      "Normal"
+    ],
+    "base": {
+        "HP": 115,
+        "Attack": 45,
+        "Defense": 20,
+        "Sp. Attack": 45,
+        "Sp. Defense": 25,
+        "Speed": 20
+    }
+  },
+  {
+    "id": 43,
+    "name": "Mystherbe",
+    "type": [
+      "Eau"
+    ],
+    "base": {
+        "HP": 45,
+        "Attack": 50,
+        "Defense": 55,
+        "Sp. Attack": 75,
+        "Sp. Defense": 65,
+        "Speed": 30
+    }
+  },
+  {
+    "id": 44,
+    "name": "Ortide",
+    "type": [
+      "Eau"
+    ],
+    "base": {
+        "HP": 60,
+        "Attack": 65,
+        "Defense": 70,
+        "Sp. Attack": 85,
+        "Sp. Defense": 75,
+        "Speed": 40
+    }
+  },
+  {
+    "id": 52,
+    "name": "Miaouss",
+    "type": [
+      "Normal"
+    ],
+    "base": {
+        "HP": 40,
+        "Attack": 45,
+        "Defense": 35,
+        "Sp. Attack": 40,
+        "Sp. Defense": 40,
+        "Speed": 90
+    }
+  },
+  {
+    "id": 53,
+    "name": "Persian",
+    "type": [
+      "Normal"
+    ],
+    "base": {
+        "HP": 65,
+        "Attack": 70,
+        "Defense": 60,
+        "Sp. Attack": 65,
+        "Sp. Defense": 65,
+        "Speed": 115
+    }
+  },
+  {
+    "id": 69,
+    "name": "Chétiflor",
+    "type": [
+      "Plante"
+    ],
+    "base": {
+        "HP": 50,
+        "Attack": 75,
+        "Defense": 35,
+        "Sp. Attack": 70,
+        "Sp. Defense": 30,
+        "Speed": 40
+    }
+  },
+  {
+    "id": 70,
+    "name": "Boustiflor",
+    "type": [
+      "Plante"
+    ],
+    "base": {
+        "HP": 65,
+        "Attack": 90,
+        "Defense": 50,
+        "Sp. Attack": 85,
+        "Sp. Defense": 45,
+        "Speed": 55
+    }
+  },
+  {
+    "id": 77,
+    "name": "Ponyta",
+    "type": [
+      "Feu"
+    ],
+    "base": {
+        "HP": 50,
+        "Attack": 85,
+        "Defense": 55,
+        "Sp. Attack": 65,
+        "Sp. Defense": 65,
+        "Speed": 90
+    }
+  },
+  {
+    "id": 78,
+    "name": "Galopa",
+    "type": [
+      "Feu"
+    ],
+    "base": {
+        "HP": 65,
+        "Attack": 100,
+        "Defense": 70,
+        "Sp. Attack": 80,
+        "Sp. Defense": 80,
+        "Speed": 105
+    }
+  },
+  {
+    "id": 98,
+    "name": "Krabby",
+    "type": [
+      "Eau"
+    ],
+    "base": {
+        "HP": 30,
+        "Attack": 105,
+        "Defense": 90,
+        "Sp. Attack": 25,
+        "Sp. Defense": 25,
+        "Speed": 50
+    }
+  },
+  {
+    "id": 99,
+    "name": "Krabboss",
+    "type": [
+      "Eau"
+    ],
+    "base": {
+        "HP": 55,
+        "Attack": 130,
+        "Defense": 115,
+        "Sp. Attack": 50,
+        "Sp. Defense": 50,
+        "Speed": 75
+    }
+  },
+  {
+    "id": 108,
+    "name": "Excelangue",
+    "type": [
+      "Normal"
+    ],
+    "base": {
+        "HP": 90,
+        "Attack": 55,
+        "Defense": 75,
+        "Sp. Attack": 60,
+        "Sp. Defense": 75,
+        "Speed": 30
+    }
+  },
+  {
+    "id": 116,
+    "name": "Hypotrempe",
+    "type": [
+      "Eau"
+    ],
+    "base": {
+        "HP": 30,
+        "Attack": 40,
+        "Defense": 70,
+        "Sp. Attack": 70,
+        "Sp. Defense": 25,
+        "Speed": 60
+    }
+  },
+  {
+    "id": 117,
+    "name": "Hypocéan",
+    "type": [
+      "Eau"
+    ],
+    "base": {
+        "HP": 55,
+        "Attack": 65,
+        "Defense": 95,
+        "Sp. Attack": 95,
+        "Sp. Defense": 45,
+        "Speed": 85
+    }
+  },
+  {
+    "id": 133,
+    "name": "Évoli",
+    "type": [
+      "Normal"
+    ],
+    "base": {
+        "HP": 55,
+        "Attack": 55,
+        "Defense": 50,
+        "Sp. Attack": 45,
+        "Sp. Defense": 65,
+        "Speed": 55
+    }
 }
+]
