@@ -16,13 +16,11 @@ class Game:
                 if event.type == QUIT:
                     self.running = False
                 elif event.type == pygame.MOUSEBUTTONDOWN:
-                    mouse_pos = pygame.mouse.get_pos()
-                    if self.window.new_game_button_rect.collidepoint(mouse_pos):
-                        print("Nouvelle Partie")
-                    elif self.window.load_game_button_rect.collidepoint(mouse_pos):
-                        print("Charger une partie existante")
+                    if not self.window.show_buttons:
+                        self.window.show_buttons = True  # Afficher les boutons après le clic
+                        self.window.message = ""  # Effacer le message
 
-            # Rafraîchi l'écran
+            # Rafraîchir l'écran
             self.window.update()
 
         pygame.quit()
