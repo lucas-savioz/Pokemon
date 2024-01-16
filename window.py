@@ -3,7 +3,7 @@ import pygame
 
 class Window:
     def __init__(self):
-        self.screen = pygame.display.set_mode((1280, 720)) # Création de la fenètre
+        self.screen = pygame.display.set_mode((1200, 900)) # Création de la fenètre
         pygame.display.set_caption("Pokémon : Chen's Exploration")
         self.clock = pygame.time.Clock() # Fréquence d'action
         self.framerate = 60 # Taux de rafraichissment
