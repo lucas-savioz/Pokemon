@@ -26,9 +26,6 @@ class Game:
             self.map.update()
             self.screen.update()
 
-            
-import tkinter as tk
-from tkinter import messagebox
 
 pygame.quit()
 
