@@ -1,16 +1,18 @@
+import tkinter as tk
+from tkinter import messagebox
 
 class InterfaceUtilisateur:
-    def init(self, jeu):
-        self.jeu = jeu
+def init(self, jeu):
+self.jeu = jeu
 
-        self.fenetre = tk.Tk()
-        self.fenetre.title("Pokémon Game")
+    self.fenetre = tk.Tk()
+    self.fenetre.title("Pokémon Game")
 
-        self.bouton_nouvelle_partie = tk.Button(self.fenetre, text="Nouvelle Partie", command=self.commencer_partie)
-        self.bouton_nouvelle_partie.pack()
+    self.bouton_nouvelle_partie = tk.Button(self.fenetre, text="Nouvelle Partie", command=self.commencer_partie)
+    self.bouton_nouvelle_partie.pack()
 
-        self.bouton_combat = tk.Button(self.fenetre, text="Combat", command=self.commencer_combat)
-        self.bouton_combat.pack()
+    self.bouton_combat = tk.Button(self.fenetre, text="Combat", command=self.commencer_combat)
+    self.bouton_combat.pack()
 
     def commencer_partie(self):
         self.jeu.commencer_partie()
