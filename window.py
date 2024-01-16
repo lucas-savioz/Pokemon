@@ -16,6 +16,10 @@ class Window:
         self.message = "Veuillez cliquer pour commencer"
         self.show_buttons = False
 
+        # Charger et jouer la musique
+        pygame.mixer.music.load("assets/sounds/Title_Screen_intro.mp3")  # Fichier audio preface_intro
+        pygame.mixer.music.play(-1)  # -1 pour répéter la musique indéfiniment
+
     # Met à jour la fenètre
     def update(self):
         pygame.display.flip()
