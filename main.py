@@ -1,6 +1,10 @@
 import pygame
+<<<<<<< HEAD
 
 from jeu.game import Game
+=======
+from game import Game
+>>>>>>> 2db8e1da6cb3e408c304aaea700da63dc7547782
 
 pygame.init()
 
