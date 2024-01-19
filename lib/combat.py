@@ -5,8 +5,23 @@ import random
 
 class Combat:
     def __init__(self, joueur, adversaire):
+        pygame.init()
         self.joueur = joueur
         self.adversaire = adversaire
+        self.screen = pygame.display.set_mode((1200, 900))  # Ajoutez la taille de votre fenêtre
+        self.clock = pygame.time.Clock()
+        self.background_combat = pygame.image.load("assets/img/map/background_combat.jpg")
+        self.image_joueur = pygame.image.load("assets/img/sprites/pokemon_joueur/carapuce_back.png")
+        self.image_adversaire = pygame.image.load("assets/img/sprites/adversaire/salameche_face.png")
+        self.font = pygame.font.Font(None, 36)
+        self.text_rect = pygame.Rect(50, 450, 700, 100)  # Rectangle pour les messages
+
+    def draw_text(self, message):
+        pygame.draw.rect(self.screen, (255, 255, 255), self.text_rect)
+        text = self.font.render(message, True, (0, 0, 0))
+        self.screen.blit(text, self.text_rect.topleft)
+        pygame.display.flip()
+        pygame.time.wait(1500)  # Attendre 1.5 secondes pour que le texte soit visible    
 
     def calculer_efficacite(self):
         type_joueur = self.joueur.type
@@ -40,6 +55,12 @@ class Combat:
     def deroulement_combat(self):
         print(f"Un combat commence entre {self.joueur.nom} et {self.adversaire.nom}!")
 
+        self.screen.blit(self.background_combat, (0, 0))
+        self.screen.blit(self.image_joueur, (50, 300))  # Coordonnées pour le joueur
+        self.screen.blit(self.image_adversaire, (600, 50))  # Coordonnées pour l'adversaire
+        pygame.display.flip()
+        pygame.time.wait(1500)  # Attendre 1.5 secondes pour afficher les images
+
         # Tant que les points de chacun des pokemon sont au dessus de zéro, la boucle while et la méthode attaque_adversaire continue
         while self.joueur.point_de_vie > 0 and self.adversaire.point_de_vie > 0:
             self.attaque_adversaire()
@@ -68,3 +89,7 @@ adversaire = Pokemon("Adversaire", 100, "plante")
 
 combat_instance = Combat(joueur, adversaire)
 combat_instance.deroulement_combat()
+
+# Quitte pygame et la fin du programme
+pygame.quit()
+sys.exit()

@@ -33,10 +33,13 @@ class Window:
 
     # Met à jour la fenêtre
     def update(self):
-        pygame.display.flip()
-        pygame.display.update()
-        self.clock.tick(self.framerate)
-        self.screen.fill((0, 0, 0))  # Fond noir
+        if self.in_combat:
+            self.combat_instance.update()
+        else:
+            pygame.display.flip()
+            pygame.display.update()
+            self.clock.tick(self.framerate)
+            self.screen.fill((0, 0, 0))  # Fond noir
 
         # Affichage du fond interactif avec le message
         self.screen.blit(self.background_image, (0, 0))
@@ -62,6 +65,7 @@ class Window:
             self.screen.blit(new_game_text, new_game_text_rect)
             self.screen.blit(load_game_text, load_game_text_rect)
 
+    # Gère les clics sur les boutons
     def handle_button_click(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos = event.pos
@@ -79,4 +83,3 @@ class Window:
             elif self.load_game_button_rect.collidepoint(mouse_pos):
                 self.button_click_sound.play()  # Jouer le son du clic
                 # Insérer ici le code à exécuter lors du clic sur Charger une partie existante
-
