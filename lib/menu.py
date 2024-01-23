@@ -3,9 +3,10 @@ from lib.combat import Combat
 from lib.pokemon import Pokemon
 from pygame.locals import QUIT
 
-class Window:
+class Menu:
     def __init__(self):
         pygame.init()
+        self.in_combat = False
         self.screen = pygame.display.set_mode((1200, 900))  # Création de la fenêtre
         pygame.display.set_caption("Pokémon : Chen's Exploration")
         self.clock = pygame.time.Clock()  # Fréquence d'action
@@ -15,16 +16,17 @@ class Window:
         self.button_hover_color = (0, 180, 255)  # Couleur des boutons lorsqu'ils sont survolés
         self.new_game_button_rect = pygame.Rect(200, 250, 400, 50)
         self.load_game_button_rect = pygame.Rect(200, 320, 400, 50)
-        self.background_image = pygame.image.load("assets/img/menu/background_intro.jpg")  # Image de fond intro
+        self.background_menu = pygame.image.load("assets/img/menu/background_intro.jpg")  # Background intro
         self.message_intro = "Veuillez cliquer pour commencer"
-        self.show_buttons = False
+        self.show_buttons = True
+        self.in_combat = False
 
         # Charger et jouer la musique
-        pygame.mixer.music.load("assets/sounds/Title_Screen_intro.mp3")  # Fichier audio preface_intro
+        pygame.mixer.music.load("assets/sounds/Title_Screen_intro.mp3")  # Audio preface_intro
         pygame.mixer.music.play(-1)  # -1 pour répéter la musique indéfiniment
 
         # Charger l'effet sonore pour le clic sur un bouton
-        self.button_click_sound = pygame.mixer.Sound("assets/sounds/button_click.mp3")  # Remplacez par le chemin de votre effet sonore
+        self.button_click_sound = pygame.mixer.Sound("assets/sounds/button_click.mp3")  # Effet sonore
 
         # Création d'une instance de la classe Pokemon pour le joueur
         self.joueur = Pokemon("Joueur", 100, "eau", 5)
@@ -42,7 +44,7 @@ class Window:
             self.screen.fill((0, 0, 0))  # Fond noir
 
         # Affichage du fond interactif avec le message
-        self.screen.blit(self.background_image, (0, 0))
+        self.screen.blit(self.background_menu, (0, 0))
 
         # Affichage du message en bas
         message_text = self.font.render(self.message_intro, True, (255, 255, 255))
@@ -77,9 +79,21 @@ class Window:
                 self.message_intro = ""  # Effacer le message introductif
 
                 # Démarrer le combat
+                self.in_combat = True
                 self.combat_instance.deroulement_combat()
 
             # Vérifier si le clic est sur le bouton Charger une partie existante
             elif self.load_game_button_rect.collidepoint(mouse_pos):
                 self.button_click_sound.play()  # Jouer le son du clic
-                # Insérer ici le code à exécuter lors du clic sur Charger une partie existante
+
+# Boucle principale du menu
+menu = Menu()
+menu_running = True
+while menu_running:
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            menu_running = False
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            menu.handle_button_click(event)
+
+    menu.update()

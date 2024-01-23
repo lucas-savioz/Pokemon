@@ -15,6 +15,9 @@ class Combat:
         self.image_adversaire = pygame.image.load("assets/img/sprites/adversaire/salameche_face.png")
         self.font = pygame.font.Font(None, 36)
         self.text_rect = pygame.Rect(50, 450, 700, 100)  # Rectangle pour les messages
+        self.input_rect = pygame.Rect(50, 550, 700, 30)  # Rectangle pour les saisies utilisateur
+        self.input_active = False  # Indique si l'input est actif
+        self.input_text = ''  # Texte entré par l'utilisateur
 
     def draw_text(self, message):
         pygame.draw.rect(self.screen, (255, 255, 255), self.text_rect)
@@ -22,6 +25,36 @@ class Combat:
         self.screen.blit(text, self.text_rect.topleft)
         pygame.display.flip()
         pygame.time.wait(1500)  # Attendre 1.5 secondes pour que le texte soit visible    
+        pygame.display.flip()
+
+    def draw_input(self):
+        pygame.draw.rect(self.screen, (255, 255, 255), self.input_rect)
+        text = self.font.render(self.input_text, True, (0, 0, 0))
+        self.screen.blit(text, (self.input_rect.x + 5, self.input_rect.y + 5))
+        pygame.display.flip()
+
+    def handle_input(self, event):
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_RETURN:
+                # Si l'utilisateur appuie sur Entrée, traiter l'input
+                choix_attaque = self.input_text
+                self.input_text = ''
+                self.input_active = False
+                self.handle_attack(choix_attaque)
+            elif event.key == pygame.K_BACKSPACE:
+                # Si l'utilisateur appuie sur Retour arrière, supprimer un caractère de l'input
+                self.input_text = self.input_text[:-1]
+            else:
+                # Sinon, ajouter le caractère à l'input
+                self.input_text += event.unicode
+
+    def handle_attack(self, choix_attaque):
+        if choix_attaque == "1":
+            self.attaque_1()
+        elif choix_attaque == "2":
+            self.attaque_2()
+        else:
+            self.draw_text("Veuillez choisir une attaque valide.")
 
     def calculer_efficacite(self):
         type_joueur = self.joueur.type
@@ -39,41 +72,37 @@ class Combat:
         efficacite = self.calculer_efficacite()
         degats = 10 * efficacite  # Dégats reçus en fonction de l'efficacité
         self.adversaire.point_de_vie -= degats
-        print(f"{self.joueur.nom} attaque {self.adversaire.nom} avec {self.joueur.attaque_1} et lui inflige {degats} points de dégâts !")
+        self.draw_text(f"{self.joueur.nom} attaque {self.adversaire.nom} avec {self.joueur.attaque_1} et lui inflige {degats} points de dégâts !")
 
     def attaque_2(self):
         soins = random.randint(10, 30)  # Soins aléatoires entre 10 et 30
         self.joueur.point_de_vie += soins
-        print(f"{self.joueur.nom} utilise {self.joueur.attaque_2} et recouvre {soins} points de vie !")
+        self.draw_text(f"{self.joueur.nom} utilise {self.joueur.attaque_2} et recouvre {soins} points de vie !")
 
     def attaque_adversaire(self):
         efficacite = self.calculer_efficacite()
         degats = 10 * efficacite
         self.joueur.point_de_vie -= degats
-        print(f"{self.adversaire.nom} attaque {self.joueur.nom} avec {self.adversaire.attaque_1} et lui inflige {degats} points de dégâts!")
+        self.draw_text(f"{self.adversaire.nom} attaque {self.joueur.nom} avec {self.adversaire.attaque_1} et lui inflige {degats} points de dégâts!")
 
     def deroulement_combat(self):
-        print(f"Un combat commence entre {self.joueur.nom} et {self.adversaire.nom}!")
 
+        self.draw_text(f"Un combat commence entre {self.joueur.nom} et {self.adversaire.nom}!")
         self.screen.blit(self.background_combat, (0, 0))
-        self.screen.blit(self.image_joueur, (50, 300))  # Coordonnées pour le joueur
-        self.screen.blit(self.image_adversaire, (600, 50))  # Coordonnées pour l'adversaire
+        self.screen.blit(self.image_joueur, (220, 500))  # Position de l'image pour le joueur
+        self.screen.blit(self.image_adversaire, (700, 250))  # Position de l'image pour l'adversaire
         pygame.display.flip()
-        pygame.time.wait(1500)  # Attendre 1.5 secondes pour afficher les images
+        pygame.time.wait(3000)  # Attendre 3 secondes pour afficher les images
 
-        # Tant que les points de chacun des pokemon sont au dessus de zéro, la boucle while et la méthode attaque_adversaire continue
+        # Boucle principale du combat
         while self.joueur.point_de_vie > 0 and self.adversaire.point_de_vie > 0:
             self.attaque_adversaire()
 
             if self.adversaire.point_de_vie <= 0:
-                print(f"{self.joueur.nom} a gagné le combat!")
+                self.draw_text(f"{self.joueur.nom} a gagné le combat!")
                 break
 
-            choix_attaque = input("Choisissez votre attaque : 1 ou 2 ")
-
-            while choix_attaque not in ["1", "2"]:
-                print("Veuillez choisir une attaque valide.")
-                choix_attaque = input("Choisissez votre attaque : 1 ou 2 ")
+            choix_attaque = self.get_user_input("Choisissez votre attaque : 1 ou 2 ", ["1", "2"])
 
             if choix_attaque == "1":
                 self.attaque_1()
@@ -81,15 +110,32 @@ class Combat:
                 self.attaque_2()
 
             if self.joueur.point_de_vie <= 0:
-                print(f"{self.adversaire.nom} a gagné le combat!")
+                self.draw_text(f"{self.adversaire.nom} a gagné le combat!")
                 break
 
+    def get_user_input(self, prompt, valid_inputs):
+        self.input_active = True
+        user_input = ""
+
+        while self.input_active:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.unicode.isdigit() and event.unicode in valid_inputs:
+                        user_input = event.unicode
+                        self.input_active = False
+
+        return user_input
+
+# Création des Pokémon et du combat
 joueur = Pokemon("Joueur", 100, "eau")
 adversaire = Pokemon("Adversaire", 100, "plante")
 
 combat_instance = Combat(joueur, adversaire)
 combat_instance.deroulement_combat()
 
-# Quitte pygame et la fin du programme
+# Quitter pygame à la fin du programme
 pygame.quit()
 sys.exit()
