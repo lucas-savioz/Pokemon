@@ -7,6 +7,7 @@ class Combat:
     def __init__(self, joueur, adversaire):
         pygame.init()
         self.joueur = joueur
+        # self.aversaire doit être random parmis les 3 pokemon
         self.adversaire = adversaire
         self.screen = pygame.display.set_mode((1200, 900))  # Ajoutez la taille de votre fenêtre
         self.clock = pygame.time.Clock()
@@ -82,33 +83,52 @@ class Combat:
     def attaque_adversaire(self):
         efficacite = self.calculer_efficacite()
         degats = 10 * efficacite
+
+        # Attaque spécifique en fonction du type de l'adversaire
+        if self.adversaire.type == "feu":
+            attaque = "Flamèche"
+        elif self.adversaire.type == "eau":
+            attaque = "Bulle d'eau"
+        else:
+            attaque = "Fouet"
+
         self.joueur.point_de_vie -= degats
-        self.draw_text(f"{self.adversaire.nom} attaque {self.joueur.nom} avec {self.adversaire.attaque_1} et lui inflige {degats} points de dégâts!")
+        self.draw_text(f"{self.adversaire.nom} attaque {self.joueur.nom} avec {attaque} et lui inflige {degats} points de dégâts!")
+
 
     def deroulement_combat(self):
 
-        self.draw_text(f"Un combat commence entre {self.joueur.nom} et {self.adversaire.nom}!")
         self.screen.blit(self.background_combat, (0, 0))
         self.screen.blit(self.image_joueur, (220, 500))  # Position de l'image pour le joueur
         self.screen.blit(self.image_adversaire, (700, 250))  # Position de l'image pour l'adversaire
         pygame.display.flip()
-        pygame.time.wait(3000)  # Attendre 3 secondes pour afficher les images
+        pygame.time.wait(2000)  # Attendre 2 secondes pour afficher les images
+        # Position du rectangle de texte de début de combat
+        self.text_rect.y = 700
+        # Afficher le message de début de combat
+        self.draw_text(f"Un combat commence entre {self.joueur.nom} et {self.adversaire.nom}!")
 
         # Boucle principale du combat
         while self.joueur.point_de_vie > 0 and self.adversaire.point_de_vie > 0:
-            self.attaque_adversaire()
-
-            if self.adversaire.point_de_vie <= 0:
-                self.draw_text(f"{self.joueur.nom} a gagné le combat!")
-                break
-
+            
             choix_attaque = self.get_user_input("Choisissez votre attaque : 1 ou 2 ", ["1", "2"])
 
             if choix_attaque == "1":
                 self.attaque_1()
             elif choix_attaque == "2":
                 self.attaque_2()
+            else:
+                self.draw_text("Veuillez choisir une attaque valide.")
 
+            # Vérification si l'adversaire est toujours en vie
+            if self.adversaire.point_de_vie <= 0:
+                self.draw_text(f"{self.joueur.nom} a gagné le combat!")
+                break
+
+            # Action de l'adversaire
+            self.attaque_adversaire()
+
+            # Vérification si le joueur est toujours en vie
             if self.joueur.point_de_vie <= 0:
                 self.draw_text(f"{self.adversaire.nom} a gagné le combat!")
                 break
@@ -130,8 +150,8 @@ class Combat:
         return user_input
 
 # Création des Pokémon et du combat
-joueur = Pokemon("Joueur", 100, "eau")
-adversaire = Pokemon("Adversaire", 100, "plante")
+joueur = Pokemon("Carapuce", 100, "eau")
+adversaire = Pokemon("Salamèche", 100, "Feu")
 
 combat_instance = Combat(joueur, adversaire)
 combat_instance.deroulement_combat()

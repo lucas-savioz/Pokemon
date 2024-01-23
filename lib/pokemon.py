@@ -8,5 +8,5 @@ class Pokemon:
         self.type = type  # feu, eau, plante
         self.niveau = niveau  # Niveau initial
         self.statut_bar_exp = 0  # Barre d'expérience initiale
-        self.attaque_1 = "Attaque1"  # Ajoutez l'attaque 1 spécifique au Pokemon
-        self.attaque_2 = "Attaque2"  # Ajoutez l'attaque 2 spécifique au Pokemon
+        self.attaque_1 = "Bulle d'eau"  # Ajoutez l'attaque 1 spécifique au Pokemon
+        self.attaque_2 = "Soin"  # Ajoutez l'attaque 2 spécifique au Pokemon
