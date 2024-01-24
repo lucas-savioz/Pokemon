@@ -23,12 +23,22 @@ class Combat:
         self.input_text = ''  # Texte entré par l'utilisateur
 
     def draw_text(self, message):
-        pygame.draw.rect(self.screen, (255, 255, 255), self.text_rect, border_radius=self.border_radius)  # Paramètres barre d'action
+        pygame.draw.rect(self.screen, (255, 255, 255), self.text_rect, border_radius=self.border_radius)
+        
+        # Ajuster la taille de la police en fonction de la longueur du texte
+        max_text_width = self.text_rect.width - 2 * self.text_padding
+        font_size = 36
+        while self.font.size(message)[0] > max_text_width:
+            font_size -= 1
+            self.font = pygame.font.Font(None, font_size)
+
         text = self.font.render(message, True, (0, 0, 0))
+        
         text_rect = text.get_rect(topleft=(self.text_rect.x + self.text_padding, self.text_rect.y + self.text_padding))
         self.screen.blit(text, text_rect.topleft)
+        
         pygame.display.flip()
-        pygame.time.wait(1500)  # Attendre 1.5 secondes pour que le texte soit visible
+        pygame.time.wait(1500)
         pygame.display.flip()
 
 
