@@ -64,6 +64,29 @@ class Combat:
         pygame.draw.rect(self.screen, (255, 0, 0), (self.status_bar_rect_joueur.x, self.status_bar_rect_joueur.y, joueur_width, self.status_bar_rect_joueur.height))
         pygame.draw.rect(self.screen, (255, 0, 0), (self.status_bar_rect_adversaire.x, self.status_bar_rect_adversaire.y, adversaire_width, self.status_bar_rect_adversaire.height))
 
+            # Couleur de base
+        joueur_color = (0, 255, 0)  # Vert (en bonne santé)
+
+        # Déterminez l'état du joueur en fonction de son pourcentage de points de vie
+        if joueur_percent_hp <= 0.6:
+            joueur_color = (255, 255, 0)  # Jaune (blessé)
+        if joueur_percent_hp <= 0.2:
+            joueur_color = (255, 0, 0)  # Rouge (très faible)
+
+        # Dessinez la barre de statut du joueur avec la couleur appropriée
+        pygame.draw.rect(self.screen, (192, 192, 192), self.status_bar_rect_joueur)  # Fond gris clair
+        pygame.draw.rect(self.screen, joueur_color, (self.status_bar_rect_joueur.x, self.status_bar_rect_joueur.y, joueur_width, self.status_bar_rect_joueur.height))
+
+        # Faites de même pour l'adversaire
+        adversaire_color = (0, 255, 0)  # Vert (en bonne santé)
+        if adversaire_percent_hp <= 0.6:
+            adversaire_color = (255, 255, 0)  # Jaune (blessé)
+        if adversaire_percent_hp <= 0.2:
+            adversaire_color = (255, 0, 0)  # Rouge (très faible)
+
+        pygame.draw.rect(self.screen, (192, 192, 192), self.status_bar_rect_adversaire)  # Fond gris clair
+        pygame.draw.rect(self.screen, adversaire_color, (self.status_bar_rect_adversaire.x, self.status_bar_rect_adversaire.y, adversaire_width, self.status_bar_rect_adversaire.height))
+
         pygame.display.flip()
 
     def handle_input(self, event):
