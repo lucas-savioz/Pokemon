@@ -3,19 +3,19 @@ import json
 from os import path
 
 # check if output file exists and load it
-filename = 'pokedex_complet.json'
+filename = 'full_pokedex.json'
 
 if path.isfile(filename) is False:
     raise Exception("File not found")
 
-with open("pokedex_complet.json", "r") as read_file:
+with open("full_pokedex.json", "r") as read_file:
   input_file_dict = json.load(read_file)
 
 # input field (for testing purposes)
-pkmn = input("Veuillez entre le nom d'un starter de la G1 : ")
+pkmn = input("Enter the name of a G1 starter Pokémon: ")
 
 # write Bulbasaur in json file    
-if pkmn == "Bulbizarre":
+if pkmn == "Bulbasaur":
     inc_id_list = [1]
 
     output_dict = dict()
@@ -27,10 +27,10 @@ if pkmn == "Bulbizarre":
     with open('pokedex.json', 'a') as output_json_file:
         json.dump(output_dict, output_json_file, indent = 1, separators=(',',": "), ensure_ascii=False)
     
-    print("Données rajoutées au Pokédex")
+    print("Data added to Pokédex")
 
 # write Charmender in json file
-if pkmn == "Salamèche":
+if pkmn == "Charmander":
     inc_id_list = [4]
 
     output_dict = dict()
@@ -42,10 +42,10 @@ if pkmn == "Salamèche":
     with open('pokedex.json', 'a') as output_json_file:
         json.dump(output_dict, output_json_file, indent = 1, separators=(',',": "), ensure_ascii=False)
     
-    print("Données rajoutées au Pokédex")
+    print("Data added to Pokédex")
 
 # write Squirtle in json file        
-if pkmn == "Carapuce":
+if pkmn == "Squirtle":
     inc_id_list = [7]
 
     output_dict = dict()
@@ -57,4 +57,4 @@ if pkmn == "Carapuce":
     with open('pokedex.json', 'a') as output_json_file:
         json.dump(output_dict, output_json_file, indent = 1, separators=(',',": "), ensure_ascii=False)
     
-    print("Données rajoutées au Pokédex")
+    print("Data added to Pokédex")
