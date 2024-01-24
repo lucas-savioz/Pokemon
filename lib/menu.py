@@ -97,3 +97,17 @@ while menu_running:
             menu.handle_button_click(event)
 
     menu.update()
+
+
+    # def wipe(screen, clacks, rate, old, new):
+    #     self.draw_text("Lancement d'une nouvelle partie")
+
+    #     screen.blit(old, (0, 0))
+    #     screnn_arr = pygame.PixelArray(screen)
+    #     new_arr = pygame.PixelArray(new)
+
+    #     for i in range(rate):
+    #         screen_arr[i::rate] = new_arr[i::rate]
+
+    #         pygame.display.flip()
+    #         clacks.clock.tick(rate)

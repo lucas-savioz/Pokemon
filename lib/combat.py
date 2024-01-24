@@ -15,18 +15,22 @@ class Combat:
         self.image_joueur = pygame.image.load("assets/img/sprites/pokemon_joueur/carapuce_back.png")
         self.image_adversaire = pygame.image.load("assets/img/sprites/adversaire/salameche_face.png")
         self.font = pygame.font.Font(None, 36)
-        self.text_rect = pygame.Rect(50, 450, 700, 100)  # Rectangle pour les messages
+        self.text_rect = pygame.Rect(30, 600, 800, 120)  # Barre pour les messages d'actions
         self.input_rect = pygame.Rect(50, 550, 700, 30)  # Rectangle pour les saisies utilisateur
+        self.border_radius = 15 # Bords de la barre d'actions
+        self.text_padding = 10
         self.input_active = False  # Indique si l'input est actif
         self.input_text = ''  # Texte entré par l'utilisateur
 
     def draw_text(self, message):
-        pygame.draw.rect(self.screen, (255, 255, 255), self.text_rect)
+        pygame.draw.rect(self.screen, (255, 255, 255), self.text_rect, border_radius=self.border_radius)  # Paramètres barre d'action
         text = self.font.render(message, True, (0, 0, 0))
-        self.screen.blit(text, self.text_rect.topleft)
+        text_rect = text.get_rect(topleft=(self.text_rect.x + self.text_padding, self.text_rect.y + self.text_padding))
+        self.screen.blit(text, text_rect.topleft)
         pygame.display.flip()
-        pygame.time.wait(1500)  # Attendre 1.5 secondes pour que le texte soit visible    
+        pygame.time.wait(1500)  # Attendre 1.5 secondes pour que le texte soit visible
         pygame.display.flip()
+
 
     def draw_input(self):
         pygame.draw.rect(self.screen, (255, 255, 255), self.input_rect)
