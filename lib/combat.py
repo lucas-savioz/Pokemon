@@ -17,6 +17,8 @@ class Combat:
         self.font = pygame.font.Font(None, 36)
         self.text_rect = pygame.Rect(30, 600, 800, 120)  # Barre pour les messages d'actions
         self.input_rect = pygame.Rect(50, 550, 700, 30)  # Rectangle pour les saisies utilisateur
+        self.status_bar_rect_joueur = pygame.Rect(220, 450, 300, 20)
+        self.status_bar_rect_adversaire = pygame.Rect(700, 100, 300, 20)
         self.border_radius = 15 # Bords de la barre d'actions
         self.text_padding = 10
         self.input_active = False  # Indique si l'input est actif
@@ -46,6 +48,22 @@ class Combat:
         pygame.draw.rect(self.screen, (255, 255, 255), self.input_rect)
         text = self.font.render(self.input_text, True, (0, 0, 0))
         self.screen.blit(text, (self.input_rect.x + 5, self.input_rect.y + 5))
+        pygame.display.flip()
+    
+    # Barre de status des pokemon
+    def draw_status_bars(self):
+        pygame.draw.rect(self.screen, (0, 255, 0), self.status_bar_rect_joueur)
+        pygame.draw.rect(self.screen, (0, 255, 0), self.status_bar_rect_adversaire)
+
+        joueur_percent_hp = self.joueur.point_de_vie / 100.0
+        adversaire_percent_hp = self.adversaire.point_de_vie / 100.0
+
+        joueur_width = int(self.status_bar_rect_joueur.width * joueur_percent_hp)
+        adversaire_width = int(self.status_bar_rect_adversaire.width * adversaire_percent_hp)
+
+        pygame.draw.rect(self.screen, (255, 0, 0), (self.status_bar_rect_joueur.x, self.status_bar_rect_joueur.y, joueur_width, self.status_bar_rect_joueur.height))
+        pygame.draw.rect(self.screen, (255, 0, 0), (self.status_bar_rect_adversaire.x, self.status_bar_rect_adversaire.y, adversaire_width, self.status_bar_rect_adversaire.height))
+
         pygame.display.flip()
 
     def handle_input(self, event):
@@ -124,7 +142,8 @@ class Combat:
 
         # Boucle principale du combat
         while self.joueur.point_de_vie > 0 and self.adversaire.point_de_vie > 0:
-            
+            self.draw_status_bars()
+
             choix_attaque = self.get_user_input("Choisissez votre attaque : 1 ou 2 ", ["1", "2"])
 
             if choix_attaque == "1":
