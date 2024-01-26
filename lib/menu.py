@@ -80,7 +80,7 @@ class Menu:
 
                 # Démarrer le combat
                 self.in_combat = True
-                self.combat_instance.deroulement_combat()
+                self.combat_instance.combat_process()
 
             # Vérifier si le clic est sur le bouton Charger une partie existante
             elif self.load_game_button_rect.collidepoint(mouse_pos):
