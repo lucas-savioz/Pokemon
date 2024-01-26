@@ -17,6 +17,7 @@ class Combat:
         self.background_combat = pygame.image.load("assets/img/map/background_combat.jpg")
         self.image_player = pygame.image.load("assets/img/sprites/pokemon_joueur/carapuce_back.png")
         self.image_enemy = pygame.image.load("assets/img/sprites/adversaire/salameche_face.png")
+        # self.image_type = pygame.image.load("assets/img/sprites/type/type_eau.png", "assets/img/sprites/type/type_feu.png", "assets/img/sprites/type/type_plante.png")
         self.font = pygame.font.Font(None, 36)
         self.text_actions = pygame.Rect(30, 600, 800, 120)  # Barre pour les messages d'actions
         self.bar_hp_player = pygame.Rect(220, 450, 300, 20)
@@ -117,9 +118,8 @@ class Combat:
 
     def draw_pokemon_info(self, pokemon, info_bar_rect):
         font = pygame.font.Font(None, 24)
-        info_text = f"{pokemon.name} | HP: {pokemon.hp} | Type: {pokemon.type} | Level: {pokemon.level}"
+        info_text = f"{pokemon.name} {pokemon.type}          N.{pokemon.level}"
         text = font.render(info_text, True, (0, 0, 0))
-
         # Ajuster la largeur de la barre d'information en fonction de la longueur du texte
         info_bar_rect.width = text.get_width() + 20  # Ajouter un espace de marge
 
@@ -142,6 +142,9 @@ class Combat:
     def draw_hp_bars(self):
         pygame.draw.rect(self.screen, (0, 255, 0), (self.bar_hp_player.x + 10, self.bar_hp_player.y, self.bar_hp_player.width, self.bar_hp_player.height))
         pygame.draw.rect(self.screen, (0, 255, 0), (self.bar_hp_enemy.x + 10, self.bar_hp_enemy.y, self.bar_hp_enemy.width, self.bar_hp_enemy.height))
+
+        info_hp_player = f"{self.player.hp}"
+        info_hp_enemy = f"{self.enemy.hp}"
 
         player_percent_hp = self.player.hp / 100.0
         enemy_percent_hp = self.enemy.hp / 100.0
@@ -175,6 +178,18 @@ class Combat:
 
         pygame.draw.rect(self.screen, (192, 192, 192), (self.bar_hp_enemy.x + 10, self.bar_hp_enemy.y, self.bar_hp_enemy.width, self.bar_hp_enemy.height))  # Fond gris clair
         pygame.draw.rect(self.screen, enemy_color_bar, (self.bar_hp_enemy.x + 10, self.bar_hp_enemy.y, enemy_width, self.bar_hp_enemy.height))
+
+        # Afficher les points de vie des joueurs
+        font = pygame.font.Font(None, 24)
+        text_player = font.render(info_hp_player, True, (0, 0, 0))
+        text_enemy = font.render(info_hp_enemy, True, (0, 0, 0))
+
+        # Centrer le texte dans les barres de vie
+        text_player_rect = text_player.get_rect(center=(self.bar_hp_player.x + 10 + player_width // 2, self.bar_hp_player.centery))
+        text_enemy_rect = text_enemy.get_rect(center=(self.bar_hp_enemy.x + 10 + enemy_width // 2, self.bar_hp_enemy.centery))
+
+        self.screen.blit(text_player, text_player_rect.topleft)
+        self.screen.blit(text_enemy, text_enemy_rect.topleft)
 
     
     ########## Boutons d'attaques ##########
