@@ -1,6 +1,6 @@
 import pygame
 
-from window import Window
+from src.class.window import Window
 from pygame.locals import QUIT
 
 # Classe Game
