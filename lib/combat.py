@@ -1,7 +1,8 @@
 import pygame
 import sys
 from lib.pokemon import Pokemon
-import random 
+import random
+from pygame.locals import QUIT
 
 ########## Eléments de classe combat ##########
 
@@ -9,7 +10,7 @@ class Combat:
     def __init__(self, player, enemy):
         pygame.init()
         self.player = player
-        # self.aversaire doit être random parmis les 3 pokemon
+        # self.enemy doit être random parmis les 3 pokemon
         self.enemy = enemy
         self.screen = pygame.display.set_mode((1200, 900))  # Ajoutez la taille de votre fenêtre
         self.clock = pygame.time.Clock()
@@ -28,8 +29,9 @@ class Combat:
     ########## Boucle principale du combat ##########
 
     def combat_process(self):
-
         self.screen.blit(self.background_combat, (0, 0))
+        pygame.mixer.music.load("assets/sounds/battle.mp3")  # Audio combat
+        pygame.mixer.music.play(-1)  # -1 pour répéter la musique indéfiniment
         self.screen.blit(self.image_player, (220, 500))  # Position de l'image pour le player
         self.screen.blit(self.image_enemy, (700, 250))  # Position de l'image pour l'enemy
         pygame.display.flip()
@@ -40,8 +42,9 @@ class Combat:
         self.draw_text_actions(f"Un combat commence entre {self.player.name} et {self.enemy.name}!")
 
         while self.player.hp > 0 and self.enemy.hp > 0:
-            self.draw_hp_bars()  # Dessiner les barres de vie
-            self.draw_buttons()  # Dessiner les buttons
+            self.draw_hp_bars()  # Dessine les barres de vie
+            self.draw_info_bars() # Dessine les barres d'information
+            self.draw_buttons()  # Dessine les boutons
             
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -98,12 +101,47 @@ class Combat:
         pygame.time.wait(2000)
         pygame.display.flip()
 
+    ########## Barre d'information des pokemon ##########
+
+    def draw_info_bars(self):
+        info_bar_player = pygame.Rect(220, 400, 300, 80)
+        info_bar_enemy = pygame.Rect(700, 50, 300, 80)
+        
+        pygame.draw.rect(self.screen, (255, 255, 255), info_bar_player, border_radius=self.border_radius)
+        pygame.draw.rect(self.screen, (255, 255, 255), info_bar_enemy, border_radius=self.border_radius)
+
+        self.draw_pokemon_info(self.player, info_bar_player)
+        self.draw_pokemon_info(self.enemy, info_bar_enemy)
+
+        pygame.display.flip()
+
+    def draw_pokemon_info(self, pokemon, info_bar_rect):
+        font = pygame.font.Font(None, 24)
+        info_text = f"{pokemon.name} | HP: {pokemon.hp} | Type: {pokemon.type} | Level: {pokemon.level}"
+        text = font.render(info_text, True, (0, 0, 0))
+
+        # Ajuster la largeur de la barre d'information en fonction de la longueur du texte
+        info_bar_rect.width = text.get_width() + 20  # Ajouter un espace de marge
+
+        # Afficher le texte centré dans la barre d'information
+        text_rect = text.get_rect(center=info_bar_rect.center)
+
+        # Dessine la barre d'information mise à jour
+        pygame.draw.rect(self.screen, (255, 255, 255), info_bar_rect, border_radius=self.border_radius)
+
+        # Afficher le texte
+        self.screen.blit(text, text_rect.topleft)
+        self.draw_hp_bars()
+
+        
+        pygame.display.flip()
+
     
     ########## Barre de vie des pokemon ##########
         
     def draw_hp_bars(self):
-        pygame.draw.rect(self.screen, (0, 255, 0), self.bar_hp_player)
-        pygame.draw.rect(self.screen, (0, 255, 0), self.bar_hp_enemy)
+        pygame.draw.rect(self.screen, (0, 255, 0), (self.bar_hp_player.x + 10, self.bar_hp_player.y, self.bar_hp_player.width, self.bar_hp_player.height))
+        pygame.draw.rect(self.screen, (0, 255, 0), (self.bar_hp_enemy.x + 10, self.bar_hp_enemy.y, self.bar_hp_enemy.width, self.bar_hp_enemy.height))
 
         player_percent_hp = self.player.hp / 100.0
         enemy_percent_hp = self.enemy.hp / 100.0
@@ -112,8 +150,8 @@ class Combat:
         player_width = int(self.bar_hp_player.width * player_percent_hp)
         enemy_width = int(self.bar_hp_enemy.width * enemy_percent_hp)
 
-        pygame.draw.rect(self.screen, (255, 0, 0), (self.bar_hp_player.x, self.bar_hp_player.y, player_width, self.bar_hp_player.height))
-        pygame.draw.rect(self.screen, (255, 0, 0), (self.bar_hp_enemy.x, self.bar_hp_enemy.y, enemy_width, self.bar_hp_enemy.height))
+        pygame.draw.rect(self.screen, (255, 0, 0), (self.bar_hp_player.x + 10, self.bar_hp_player.y, player_width, self.bar_hp_player.height))
+        pygame.draw.rect(self.screen, (255, 0, 0), (self.bar_hp_enemy.x + 10, self.bar_hp_enemy.y, enemy_width, self.bar_hp_enemy.height))
 
         # Couleur de base des barres de vie
         player_color_bar = (0, 255, 0)  # Vert (en bonne santé)
@@ -125,19 +163,22 @@ class Combat:
             player_color_bar = (255, 0, 0)  # Rouge (très faible)
 
         # Barre de vie du pokemon player fond gris
-        pygame.draw.rect(self.screen, (192, 192, 192), self.bar_hp_player)  # Fond gris clair
-        pygame.draw.rect(self.screen, player_color_bar, (self.bar_hp_player.x, self.bar_hp_player.y, player_width, self.bar_hp_player.height))
+        pygame.draw.rect(self.screen, (192, 192, 192), (self.bar_hp_player.x + 10, self.bar_hp_player.y, self.bar_hp_player.width, self.bar_hp_player.height))  # Fond gris clair
+        pygame.draw.rect(self.screen, player_color_bar, (self.bar_hp_player.x + 10, self.bar_hp_player.y, player_width, self.bar_hp_player.height))
 
-        # Barre de vie du pokemon enemy
+        # Barre de vie du pokemon
         enemy_color_bar = (0, 255, 0)  # Vert (en bonne santé)
         if enemy_percent_hp <= 0.6:
             enemy_color_bar = (255, 255, 0)  # Jaune (blessé)
         if enemy_percent_hp <= 0.2:
             enemy_color_bar = (255, 0, 0)  # Rouge (très faible)
 
-        pygame.draw.rect(self.screen, (192, 192, 192), self.bar_hp_enemy)  # Fond gris clair
-        pygame.draw.rect(self.screen, enemy_color_bar, (self.bar_hp_enemy.x, self.bar_hp_enemy.y, enemy_width, self.bar_hp_enemy.height))
+        pygame.draw.rect(self.screen, (192, 192, 192), (self.bar_hp_enemy.x + 10, self.bar_hp_enemy.y, self.bar_hp_enemy.width, self.bar_hp_enemy.height))  # Fond gris clair
+        pygame.draw.rect(self.screen, enemy_color_bar, (self.bar_hp_enemy.x + 10, self.bar_hp_enemy.y, enemy_width, self.bar_hp_enemy.height))
+
     
+    ########## Boutons d'attaques ##########
+
     def draw_buttons(self):
         action_btn_weight = self.action_btn_weight  # Modifiez la largeur des buttons selon vos besoins
         action_btn_height = self.action_btn_height

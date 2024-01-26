@@ -1,7 +1,6 @@
 import pygame
 from lib.combat import Combat
 from lib.pokemon import Pokemon
-from pygame.locals import QUIT
 
 class Menu:
     def __init__(self):
@@ -22,7 +21,7 @@ class Menu:
         self.in_combat = False
 
         # Charger et jouer la musique
-        pygame.mixer.music.load("assets/sounds/Title_Screen_intro.mp3")  # Audio preface_intro
+        pygame.mixer.music.load("assets/sounds/Title_Screen_intro.mp3")  # Audio preface intro
         pygame.mixer.music.play(-1)  # -1 pour répéter la musique indéfiniment
 
         # Charger l'effet sonore pour le clic sur un bouton
