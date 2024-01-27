@@ -33,20 +33,46 @@ class Combat:
         self.screen.blit(self.background_combat, (0, 0))
         pygame.mixer.music.load("assets/sounds/battle.mp3")  # Audio combat
         pygame.mixer.music.play(-1)  # -1 pour répéter la musique indéfiniment
-        self.screen.blit(self.image_player, (220, 500))  # Position de l'image pour le player
-        self.screen.blit(self.image_enemy, (700, 250))  # Position de l'image pour l'enemy
         pygame.display.flip()
-        pygame.time.wait(2000)  # Attendre 2 secondes pour afficher les images
+        pygame.time.wait(1000)
+
         # Position de la barre de texte d'actions de combat
         self.text_actions.y = 700
+
         # Afficher le message de début de combat
         self.draw_text_actions(f"Un combat commence entre {self.player.name} et {self.enemy.name}!")
 
+        pygame.display.flip()
+        pygame.time.wait(2000)  # Attendre 2 secondes avant d'afficher l'image du joueur
+
+        # Redessiner le fond pour s'assurer que le message est au-dessus de l'image du joueur
+        self.screen.blit(self.background_combat, (0, 0))
+
+        # Afficher l'image du joueur
+        self.screen.blit(self.image_player, (220, 500))  # Position de l'image pour le player
+
+        pygame.display.flip()
+        pygame.time.wait(1000)
+
+        # Afficher l'image de l'ennemi
+        self.screen.blit(self.image_enemy, (700, 250))  # Position de l'image pour l'enemy
+
+        pygame.display.flip()
+        pygame.time.wait(2000)  # Attendre 2 secondes pour afficher les images
+
+
+        # Déclaration de la variable pour stocker le message
+        self.message = ""
+
         while self.player.hp > 0 and self.enemy.hp > 0:
-            self.draw_hp_bars()  # Dessine les barres de vie
-            self.draw_info_bars() # Dessine les barres d'information
-            self.draw_buttons()  # Dessine les boutons
-            
+            # Affichage des éléments du combat
+            self.draw_hp_bars()
+            self.draw_info_bars()
+            self.draw_buttons()
+
+            # Affichage du message
+            self.draw_text_actions(self.message)
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -54,34 +80,32 @@ class Combat:
                 elif event.type == pygame.KEYDOWN:
                     if event.unicode.isdigit() and event.unicode in ["1", "2"]:
                         self.handle_attack(event.unicode)
-
-                # Gestion des clics de souris sur les buttons
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     mouse_pos = pygame.mouse.get_pos()
                     self.check_button_click(mouse_pos)
 
-            # Actions du combat (attaques, vérifications, etc.)
-            choice_atk = self.get_user_input("Choisissez votre attaque : 1 ou 2 ", ["1", "2"])
-
+            # Actions du combat
+            choice_atk = self.get_user_input("Choisissez votre attaque", self.button_rect_1, self.button_rect_2)
             if choice_atk == "1":
                 self.atk_1()
             elif choice_atk == "2":
                 self.atk_2()
             else:
                 self.draw_text_actions("Veuillez choisir une attaque valide.")
+                pygame.display.flip()
+                pygame.time.wait(500)
 
-            # Vérification si l'adversaire est toujours en vie
+
+            # Vérifications de fin de combat
             if self.enemy.hp <= 0:
-                self.draw_text_actions(f"{self.player.name} a gagné le combat!")
+                self.message = f"{self.player.name} a gagné le combat!"
                 break
-
-            # Action d'attaque de l'adversaire
-            self.atk_enemy()
-
-            # Vérification si le pokemon joueur est toujours en vie
+            self.atk_enemy()  # Action d'attaque de l'adversaire
             if self.player.hp <= 0:
-                self.draw_text_actions(f"{self.enemy.name} a gagné le combat!")
+                self.message = f"{self.enemy.name} a gagné le combat!"
                 break
+
+            pygame.display.flip()  # Rafraîchir l'écran à chaque itération de la boucle
 
     def draw_text_actions(self, message):
         pygame.draw.rect(self.screen, (255, 255, 255), self.text_actions, border_radius=self.border_radius)
@@ -277,21 +301,22 @@ class Combat:
         self.player.hp -= degats
         self.draw_text_actions(f"{self.enemy.name} attaque {self.player.name} avec {attaque} et lui inflige {degats} points de dégâts!")
 
-    def get_user_input(self, prompt, valid_inputs):
-        self.input_active = True
-        user_input = ""
+    def get_user_input(self, message, button_rect_1, button_rect_2):
+        # Affichage du message
+        self.draw_text_actions(message)
+        pygame.display.flip()
 
-        while self.input_active:
+        while True:
             for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    sys.exit()
-                elif event.type == pygame.KEYDOWN:
-                    if event.unicode.isdigit() and event.unicode in valid_inputs:
-                        user_input = event.unicode
-                        self.input_active = False
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    mouse_pos = pygame.mouse.get_pos()
+                    # Vérification du clic de souris sur les boutons
+                    if button_rect_1.collidepoint(mouse_pos):
+                        return "1"
+                    elif button_rect_2.collidepoint(mouse_pos):
+                        return "2"
 
-        return user_input
+
 
 # Création des Pokémon et du combat
 player = Pokemon("Carapuce", 100, "eau")
