@@ -10,22 +10,61 @@ class Combat:
     def __init__(self, player, enemy):
         pygame.init()
         self.player = player
-        # self.enemy doit être random parmis les 3 pokemon
         self.enemy = enemy
-        self.screen = pygame.display.set_mode((1200, 900))  # Ajoutez la taille de votre fenêtre
+        self.screen = pygame.display.set_mode((1200, 900))
         self.clock = pygame.time.Clock()
         self.background_combat = pygame.image.load("assets/img/map/background_combat.jpg")
         self.image_player = pygame.image.load("assets/img/sprites/pokemon_joueur/carapuce_back.png")
-        self.image_enemy = pygame.image.load("assets/img/sprites/adversaire/salameche_face.png")
-        # self.image_type = pygame.image.load("assets/img/sprites/type/type_eau.png", "assets/img/sprites/type/type_feu.png", "assets/img/sprites/type/type_plante.png")
+        self.images_enemy = [
+            pygame.image.load("assets/img/sprites/adversaire/salameche_face.png"),
+            pygame.image.load("assets/img/sprites/adversaire/carapuce_face.png"),
+            pygame.image.load("assets/img/sprites/adversaire/bulbizarre_face.png")
+        ]
+        self.image_enemy = random.choice(self.images_enemy)
+        self.enemy_type = self.get_enemy_type(self.image_enemy)
         self.font = pygame.font.Font(None, 36)
-        self.text_actions = pygame.Rect(30, 600, 800, 120)  # Barre pour les messages d'actions
         self.bar_hp_player = pygame.Rect(220, 450, 300, 20)
         self.bar_hp_enemy = pygame.Rect(700, 100, 300, 20)
-        self.border_radius = 15 # Bords de la barre d'actions
+        self.border_radius = 15
         self.text_padding = 10
+        self.text_actions = pygame.Rect(30, 600, 800, 120)
         self.action_btn_weight = 150
         self.action_btn_height = 120
+        self.button_color_base = (173, 216, 230)
+        self.button_color_hover = (25, 25, 112)
+        self.button_rect_1 = pygame.Rect(850, 700, self.action_btn_weight, self.action_btn_height)
+        self.button_rect_2 = pygame.Rect(1020, 700, self.action_btn_weight, self.action_btn_height)
+
+    def create_enemy(self):
+        # Sélection aléatoire d'un type d'ennemi
+        enemy_type = random.choice(["feu", "eau", "plante"])
+        
+        # Sélection du nom, de l'image et du niveau de l'ennemi en fonction de son type
+        if enemy_type == "feu":
+            enemy_name = "Salamèche"
+            enemy_image = "salameche_face.png"
+        elif enemy_type == "eau":
+            enemy_name = "Carapuce"
+            enemy_image = "carapuce_face.png"
+        else:
+            enemy_name = "Bulbizarre"
+            enemy_image = "bulbizarre_face.png"
+
+        # Création d'une instance de Pokemon avec le nom, les points de vie, le type, l'image et le niveau de l'ennemi
+        enemy = Pokemon(enemy_name, 100, enemy_type, enemy_image, 1)
+        return enemy
+
+
+    
+    def get_enemy_type(self, image_name):
+        type_mapping = {
+            "salameche_face.png": "feu",
+            "carapuce_face.png": "eau",
+            "bulbizarre_face.png": "plante"
+        }
+
+        return type_mapping.get(image_name, random.choice(self.images_enemy))
+
 
     ########## Boucle principale du combat ##########
 
@@ -55,7 +94,7 @@ class Combat:
         pygame.time.wait(1000)
 
         # Afficher l'image de l'ennemi
-        self.screen.blit(self.image_enemy, (700, 250))  # Position de l'image pour l'enemy
+        self.screen.blit(self.image_enemy, (700, 250)) # Position de l'image pour l'enemy
 
         pygame.display.flip()
         pygame.time.wait(2000)  # Attendre 2 secondes pour afficher les images
@@ -142,7 +181,7 @@ class Combat:
 
     def draw_pokemon_info(self, pokemon, info_bar_rect):
         font = pygame.font.Font(None, 24)
-        info_text = f"{pokemon.name} {pokemon.type}          N.{pokemon.level}"
+        info_text = f"{pokemon.name} {pokemon.type}          N.{pokemon.level}"  # Assurez-vous d'utiliser pokemon.name pour obtenir le nom de l'ennemi
         text = font.render(info_text, True, (0, 0, 0))
         # Ajuster la largeur de la barre d'information en fonction de la longueur du texte
         info_bar_rect.width = text.get_width() + 20  # Ajouter un espace de marge
@@ -159,6 +198,7 @@ class Combat:
 
         
         pygame.display.flip()
+
 
     
     ########## Barre de vie des pokemon ##########
@@ -319,12 +359,21 @@ class Combat:
 
 
 # Création des Pokémon et du combat
-player = Pokemon("Carapuce", 100, "eau")
-enemy = Pokemon("Salamèche", 100, "Feu")
+player = Pokemon("Carapuce", 100, "eau", "carapuce_back.png")
 
-combat_instance = Combat(player, enemy)
+combat_instance = Combat(player, None)  # Création de l'instance de combat avec le joueur
+
+# Déterminer l'ennemi
+enemy = combat_instance.create_enemy()
+
+# Mettre à jour l'ennemi dans combat_instance
+combat_instance.enemy = enemy
+
+
+# Lancer le combat
 combat_instance.combat_process()
 
 # Quitter pygame à la fin du programme
 pygame.quit()
 sys.exit()
+
