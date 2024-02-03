@@ -368,12 +368,3 @@ enemy = combat_instance.create_enemy()
 
 # Mettre à jour l'ennemi dans combat_instance
 combat_instance.enemy = enemy
-
-
-# Lancer le combat
-combat_instance.combat_process()
-
-# Quitter pygame à la fin du programme
-pygame.quit()
-sys.exit()
-
