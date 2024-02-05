@@ -1,6 +1,6 @@
 import pygame
 import sys
-from lib.pokemon import Pokemon
+from classes.pokemon import Pokemon
 import random
 from pygame.locals import QUIT
 

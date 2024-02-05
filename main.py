@@ -1,4 +1,4 @@
-from lib.menu import Menu
+from classes.menu import Menu
 
 # Initialisation du menu et lancement de la boucle principale
 menu = Menu()

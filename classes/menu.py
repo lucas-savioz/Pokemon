@@ -1,6 +1,6 @@
 import pygame
-from lib.combat import Combat
-from lib.pokemon import Pokemon
+from classes.combat import Combat
+from classes.pokemon import Pokemon
 
 class Menu:
     def __init__(self):
