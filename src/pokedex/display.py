@@ -2,7 +2,7 @@ import pygame
 
 pygame.init()
 pygame.display.set_caption('Pokédex')
-pygame.display.set_icon('pokeball')
+pygame.display.set_icon('pokeball.png')
 
 # Setting game window dimensions
 window_width = 1200
