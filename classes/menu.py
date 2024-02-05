@@ -2,6 +2,8 @@ import pygame
 from classes.combat import Combat
 from classes.pokemon import Pokemon
 
+########## Eléments de classe Menu ##########
+
 class Menu:
     def __init__(self):
         pygame.init()
@@ -24,6 +26,8 @@ class Menu:
         self.player = Pokemon("Joueur", 100, "eau", 5)
         self.enemy = Pokemon("Adversaire", 100, "plante", 5)
 
+    ########## Nouvelle Partie ##########
+        
     def new_game(self):
         if self.new_game_button.collidepoint(pygame.mouse.get_pos()):
             self.button_click_sound.play()  # Joue le son du clic
@@ -32,12 +36,16 @@ class Menu:
             combat_instance = Combat(self.player, self.enemy)  # Crée l'instance de combat
             combat_instance.combat_process()  # Lance le combat
 
+    ########## Charger une partie existante ##########
+
     def continue_game(self):
         if self.load_game_button.collidepoint(pygame.mouse.get_pos()):
             self.button_click_sound.play()  # Jouer le son du clic
             self.show_buttons = True
             self.message_intro = ""
             # Instance de combat en cours à faire ...
+
+    ########## Boucle du menu ##########
 
     def loop_menu(self):
         while True:

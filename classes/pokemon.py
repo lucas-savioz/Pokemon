@@ -1,6 +1,3 @@
-import pygame
-import sys
-
 class Pokemon:
     def __init__(self, name, hp, pokemon_type, image, level=1):
         self.name = name
