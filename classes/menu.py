@@ -22,19 +22,18 @@ class Menu:
         pygame.mixer.music.play(-1)  # Répéte la musique indéfiniment
         self.button_click_sound = pygame.mixer.Sound("assets/sounds/button_click.mp3")  # Effet sonore du clic
 
-        # Création d'une instance de joueur et d'adversaire
-        self.player = Pokemon("Joueur", 100, "eau", 5)
-        self.enemy = Pokemon("Adversaire", 100, "plante", 5)
-
     ########## Nouvelle Partie ##########
         
     def new_game(self):
         if self.new_game_button.collidepoint(pygame.mouse.get_pos()):
-            self.button_click_sound.play()  # Joue le son du clic
-            self.show_buttons = True  # Affiche les boutons après le clic
-            self.message_intro = ""  # Efface le message introductif
-            combat_instance = Combat(self.player, self.enemy)  # Crée l'instance de combat
-            combat_instance.combat_process()  # Lance le combat
+            self.button_click_sound.play()
+            self.show_buttons = True
+            self.message_intro = ""
+            player = Pokemon("Joueur", 100, "eau", "carapuce_back.png")  # Créez le Pokémon du joueur
+            combat_instance = Combat(player, None)  # Créez l'instance de combat avec le joueur
+            enemy = combat_instance.create_enemy()  # Créez un ennemi aléatoire
+            combat_instance.enemy = enemy  # Mettez à jour l'ennemi dans l'instance de combat
+            combat_instance.combat_process()  # Lancez le combat
 
     ########## Charger une partie existante ##########
 

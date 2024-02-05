@@ -7,21 +7,16 @@ from pygame.locals import QUIT
 ########## Eléments de classe combat ##########
 
 class Combat:
-    def __init__(self, player, enemy):
+    def __init__(self, player, enemy=None):
         pygame.init()
         self.player = player
+        if enemy is None:
+            enemy = self.create_enemy()
         self.enemy = enemy
         self.screen = pygame.display.set_mode((1200, 900))
         self.clock = pygame.time.Clock()
         self.background_combat = pygame.image.load("assets/img/map/background_combat.jpg")
         self.image_player = pygame.image.load("assets/img/sprites/pokemon_joueur/carapuce_back.png")
-        self.images_enemy = [
-            pygame.image.load("assets/img/sprites/adversaire/salameche_face.png"),
-            pygame.image.load("assets/img/sprites/adversaire/carapuce_face.png"),
-            pygame.image.load("assets/img/sprites/adversaire/bulbizarre_face.png")
-        ]
-        self.image_enemy = random.choice(self.images_enemy)
-        self.enemy_type = self.get_enemy_type(self.image_enemy)
         self.font = pygame.font.Font(None, 36)
         self.bar_hp_player = pygame.Rect(220, 450, 300, 20)
         self.bar_hp_enemy = pygame.Rect(700, 100, 300, 20)
@@ -36,36 +31,24 @@ class Combat:
         self.button_rect_2 = pygame.Rect(1020, 700, self.action_btn_weight, self.action_btn_height)
 
     def create_enemy(self):
-        # Sélection aléatoire d'un type d'ennemi
-        enemy_type = random.choice(["feu", "eau", "plante"])
+        # Choix aléatoire entre Salamèche, Carapuce ou Bulbizarre
+        enemy_name = random.choice(["Salamèche", "Carapuce", "Bulbizarre"])
         
-        # Sélection du nom, de l'image et du niveau de l'ennemi en fonction de son type
-        if enemy_type == "feu":
-            enemy_name = "Salamèche"
-            enemy_image = "salameche_face.png"
-        elif enemy_type == "eau":
-            enemy_name = "Carapuce"
-            enemy_image = "carapuce_face.png"
-        elif enemy_type == "plante":
-            enemy_name = "Bulbizarre"
-            enemy_image = "bulbizarre_face.png"
+        # Mapper les noms d'ennemis aux types et images correspondants
+        enemy_info = {
+            "Salamèche": ("feu", "salameche_face.png"),
+            "Carapuce": ("eau", "carapuce_face.png"),
+            "Bulbizarre": ("plante", "bulbizarre_face.png")
+        }
+
+        # Obtenir les informations de l'ennemi en fonction de son nom
+        enemy_type, enemy_image = enemy_info[enemy_name]
 
         # Création d'une instance de Pokemon avec le nom, les points de vie, le type, l'image et le niveau de l'ennemi
         enemy = Pokemon(enemy_name, 100, enemy_type, enemy_image, 1)
         return enemy
 
-
-    
-    def get_enemy_type(self, image_name):
-        type_mapping = {
-            "salameche_face.png": "feu",
-            "carapuce_face.png": "eau",
-            "bulbizarre_face.png": "plante"
-        }
-
-        return type_mapping.get(image_name, random.choice(self.images_enemy))
-
-
+# Les dégâts ne sont pas bien répartit en fonction du pokémon en face, cela ne pas on ne voie pas l'avantage des dégats par rapport au type : 
     ########## Boucle principale du combat ##########
 
     def combat_process(self):
@@ -89,12 +72,6 @@ class Combat:
 
         # Afficher l'image du joueur
         self.screen.blit(self.image_player, (220, 500))  # Position de l'image pour le player
-
-        pygame.display.flip()
-        pygame.time.wait(1000)
-
-        # Afficher l'image de l'ennemi
-        self.screen.blit(self.image_enemy, (700, 250)) # Position de l'image pour l'enemy
 
         pygame.display.flip()
         pygame.time.wait(2000)  # Attendre 2 secondes pour afficher les images
@@ -145,6 +122,7 @@ class Combat:
                 break
 
             pygame.display.flip()  # Rafraîchir l'écran à chaque itération de la boucle
+            pygame.mixer.music.stop()
 
     def draw_text_actions(self, message):
         pygame.draw.rect(self.screen, (255, 255, 255), self.text_actions, border_radius=self.border_radius)
@@ -287,21 +265,12 @@ class Combat:
         pygame.display.flip()
 
     def check_button_click(self, mouse_pos):
-        # Vérifier si le clic est sur le button 1
+        # Vérifier si le clic est sur le button 1 ou le button 2
         if self.button_rect_1.collidepoint(mouse_pos):
-            self.handle_attack("1")
-
-        # Vérifier si le clic est sur le button 2
+            self.atk_1()  # Exécutez l'attaque 1
         elif self.button_rect_2.collidepoint(mouse_pos):
-            self.handle_attack("2")
+            self.atk_2()  # Exécutez l'attaque 2
 
-    def handle_attack(self, choice_atk):
-        if choice_atk == "1":
-            self.atk_1()
-        elif choice_atk == "2":
-            self.atk_2()
-        else:
-            self.draw_text_actions("Veuillez choisir une attaque valide.")
 
     def calculer_efficacite(self):
         type_player = self.player.type
