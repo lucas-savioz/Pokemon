@@ -2,7 +2,7 @@ Projet Pokemon
 
 Objectifs du projet : 
 
-Création d'un jeu fonctionnel 
+Création d'un jeu Pokemon fonctionnel avec Pygame et pokedex.json       
 
 Développer un jeu " Pokémon fonctionnel " où lex joueurx peut participer à des combats contre des Pokémon sauvages, ux dresseurx et interagir avec le Pokédex.
 
