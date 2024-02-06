@@ -1,27 +1,40 @@
-Pokemon
-#Objectifs du projet : Création d'un jeu fonctionnel :
+Projet Pokemon 
 
-Développer un jeu de Pokémon fonctionnel, où le joueur peut participer à des combats contre des Pokémon sauvages et un dresseur, interagir avec le Pokédex.
+Objectifs du projet : 
 
-Interface utilisateur :
+Création d'un jeu fonctionnel 
 
-Objectif : Concevoir une interface graphique simple et intuitive pour assurer une bonne expérience utilisateur.
+Développer un jeu " Pokémon fonctionnel " où lex joueurx peut participer à des combats contre des Pokémon sauvages, ux dresseurx et interagir avec le Pokédex.
 
-Mécaniques de combat :
+Interface utilisateurx :
 
-Objectif : Implémenter des mécaniques de combat basées sur les types de Pokémon, avec des calculs de dégâts en fonction des types et des statistiques.
+Objectif : 
+
+Concevoir une interface graphique simple et intuitive pour assurer une bonne expérience utilisateur.
+
+Mécanique de combat :
+
+Objectif : 
+
+Implémenter des mécaniques de combat basées sur les différents types de Pokémon (des calculs de dégâts en fonction des types/des statistiques).
 
 Sauvegarde des données :
 
-Objectif : Intégrer un système de sauvegarde des données des Pokémon dans des fichiers (pokedex.json, pokemon.json) pour permettre la persistance des données entre les sessions de jeu.
+Objectif : 
+
+Intégrer un système de sauvegarde des données des Pokémon dans des fichiers (pokedex.json, pokemon.json) pour permettre la persistance des données entre les sessions de jeu.
 
 Gestion du Pokédex :
 
-Objectif : Permettre au joueur de consulter et d'agrandir le Pokédex en enregistrant les informations sur les Pokémon rencontrés.
+Objectif : 
+
+Permettre au joueur de consulter et d'agrandir le Pokédex en enregistrant les informations sur les Pokémon rencontrés.
 
 Documentation :
 
-Objectif : Rédiger une documentation claire et concise pour faciliter la maintenance du code et permettre à d'autres développeurs de comprendre le projet.
+Objectif : 
+
+Rédiger une documentation claire et conçise pour faciliter la maintenance du code et permettre à d'autres développeurxs de comprendre le projet.
 
 Pokémon Game ◓ with Python
 
