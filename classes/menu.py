@@ -29,11 +29,11 @@ class Menu:
             self.button_click_sound.play()
             self.show_buttons = True
             self.message_intro = ""
-            player = Pokemon("Joueur", 100, "eau", "carapuce_back.png")  # Créez le Pokémon du joueur
-            combat_instance = Combat(player, None)  # Créez l'instance de combat avec le joueur
-            enemy = combat_instance.create_enemy()  # Créez un ennemi aléatoire
-            combat_instance.enemy = enemy  # Mettez à jour l'ennemi dans l'instance de combat
-            combat_instance.combat_process()  # Lancez le combat
+            player = Pokemon("Carapuce Joueur", 100, "eau", "carapuce_back.png")  # Crée le Pokémon du joueur
+            combat_instance = Combat(player, None)  # Crée l'instance de combat avec le joueur
+            enemy = combat_instance.create_enemy()  # Crée un ennemi aléatoire
+            combat_instance.enemy = enemy  # Met à jour l'ennemi dans l'instance de combat
+            combat_instance.combat_process()  # Lance la boucle de combat
 
     ########## Charger une partie existante ##########
 
@@ -67,3 +67,4 @@ class Menu:
 
             pygame.display.flip()
             self.clock.tick(self.framerate)
+pygame.quit()
